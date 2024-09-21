@@ -7,13 +7,13 @@ When you buy a piece of hardware, usually there would be an image pre flashed on
 
 Advantages of building a custom Linux image:
 
-You could restrict the image size according to your memory constraints by including or excluding specific modules of your choice.
+1. You could restrict the image size according to your memory constraints by including or excluding specific modules of your choice.
 
-You could tweak the configurations to improve the performance of your device.
+2. You could tweak the configurations to improve the performance of your device.
 
-Write and include your own device drivers onto the kernel.
+3. Write and include your own device drivers onto the kernel.
 
-In case you are planning to contribute to the open source community, building and testing your image is a must :)
+4. In case you are planning to contribute to the open source community, building and testing your image is a must :)
 
 This is indeed a very vast topic to discuss but I would limit this article to the following areas and the second one is really the prize winner.
 
@@ -35,19 +35,19 @@ The core architecture is important because the way you instruct the processor to
 
 You also need to ensure that the size of your first stage boot loader does not exceed the size of the internal SRAM of your device.
 
-From the above block diagram, We would require the following files for our device to just to boot up:
+We would require the following files for our device to just to boot up:
 
-MLO (.bin) 
+1. MLO (.bin)                   https://elinux.org/Panda_How_to_MLO_&_u-boot
 
-u-boot (.img)
+2. u-boot (.img)                https://docs.u-boot.org/en/latest/
 
-uEnv (.txt)
+3. uEnv (.txt)                  http://www.learningaboutelectronics.com/Articles/What-is-a-uenv-txt-file.php
 
-uImage /zImage (.bin)
+4. uImage /zImage (.bin)        https://stackoverflow.com/questions/22322304/image-vs-zimage-vs-uimage
 
-Device tree blob (.dtb)
+5. Device tree blob (.dtb)      https://community.arm.com/oss-platforms/w/docs/525/device-tree 
 
-Root file system
+6. Root file system
 
 There are multiple ways to build these image, which are:
 
@@ -61,30 +61,32 @@ Linux source code ( Builds the kernel images only )
 
 I would like to pick out the Yocto project here because of the following reasons:
 
-Most vendors support Yocto directly, which means you already have the BSP files and configurations available.
+1. Most vendors support Yocto directly, which means you already have the BSP files and configurations available.
 
-The OpenEmbedded build system creates an entire Linux distribution, including the toolchain, from source.
+2. The OpenEmbedded build system creates an entire Linux distribution, including the toolchain, from source.
 
-Yocto allows you to create custom Linux distributions, with a wide range of configuration options and package management tools.
+3. Yocto allows you to create custom Linux distributions, with a wide range of configuration options and package management tools.
 
-Reduced build time over successive attempts by caching the build attributes.
+4. Reduced build time over successive attempts by caching the build attributes.
 
 However, It is a heavy suite and requires some learning time.
 Components of Yocto Project
 
 You could head out to the below link for detailed build procedure:
 
+        https://docs.yoctoproject.org/index.html
+
 To brief it up,
 
-You have installed the required packages based on your host machine.
+1. You have installed the required packages based on your host machine.
 
-Cloned the poky repository and checked out the latest LTS release.
+2. Cloned the poky repository and checked out the latest LTS release.
 
-Modified the /poky/build/config/local.conf file and /poky/build/config/local.conf file in case your device's BSP had to be included manually.
+3. Modified the /poky/build/config/local.conf file and /poky/build/config/local.conf file in case your device's BSP had to be included manually.
 
-Initialized the build environment which sets up bitbake.
+4. Initialized the build environment which sets up bitbake.
 
-Add / remove packages using: bitbake -c menuconfig virtual/kernel
+5. Add / remove packages using: bitbake -c menuconfig virtual/kernel
 
 kpranav@Ubuntu22:~/Projects/yocto/poky/build$ bitbake -c menuconfig virtual/kernel
 Loading cache: 100% |################################################################################################| Time: 0:00:01
@@ -111,7 +113,7 @@ NOTE: Executing Tasks
 
 Now, you can select the packages / drivers as: Build-in / Loadable / Not Included.
 
- You finally star the building the bootable files by issuing : bitbake <recipes>. This would take a couple of hours depending upon your machine. Once it is done, You'll be able to find all your files at the following location:
+You finally star the building the bootable files by issuing : bitbake <recipes>. This would take a couple of hours depending upon your machine. Once it is done, You'll be able to find all your files at the following location:
 
 /poky/build/tmp/deploy/images/<Machine Name>
 Output Images
