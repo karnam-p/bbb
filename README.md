@@ -1,5 +1,6 @@
 # bbb
 Device driver development on beagle bone black.
+        
         Hey, for the past few days I had been working on getting my own Linux distro to work on the piece of hardware I had at home and I think it would be worth the while to share my findings with you all. If you are new to this just like me, I would recommend reading this article as I break things down and provide references to some of the important aspects. However I must mention, there are other really informative articles / answers out there but this one aims to put all of them under one roof.
 
 When you buy a piece of hardware, usually there would be an image pre flashed onto the emmc so that you could just plug and play. These images get out dated over time and the device vendor might have provided you with latest pre-built images that you would have to flash. But today, we will build our own images and bring up with device.
